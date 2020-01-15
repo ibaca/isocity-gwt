@@ -10,6 +10,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.resources.client.ImageResource;
 import elemental2.core.JsMath;
 import elemental2.core.JsString;
 import elemental2.dom.BaseRenderingContext2D.FillStyleUnionType;
@@ -46,9 +47,8 @@ public class IsoCity implements EntryPoint {
     private CanvasRenderingContext2D cf;
 
     @Override public void onModuleLoad() {
-        /* texture from https://opengameart.org/content/isometric-landscape */
         texture = new Image();
-        texture.src = "01_130x66_130x230.png";
+        texture.src = bundle.landscape().getSafeUri().asString();
         texture.onload = p0 -> {
             init(); return null;
         };
@@ -86,7 +86,7 @@ public class IsoCity implements EntryPoint {
                 HTMLElement div = Js.cast(document.createElement("div"));
                 div.id = "tool_" + toolCount++;
                 div.style.display = "block";
-                /* width of 132 instead of 130  = 130 image + 2 border = 132 */
+                /* width of 132 instead of 130 = 130 image + 2 border = 132 */
                 div.style.backgroundPosition = "-" + (j * 130 + 2) + "px -" + (i * 230) + "px";
 
                 var ij = new int[] { i, j };
@@ -204,6 +204,8 @@ public class IsoCity implements EntryPoint {
 
     interface MyBundle extends ClientBundle {
         @Source("style.gss") MyStyle style();
+        /** Landscape texture from https://opengameart.org/content/isometric-landscape (01 130x66 130x230) */
+        @Source("landscape.png") ImageResource landscape();
     }
 
     static MyBundle bundle = GWT.create(MyBundle.class);

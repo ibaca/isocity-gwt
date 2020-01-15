@@ -59,7 +59,7 @@ canvas {
 
 #tools > div {
     display: block;
-    background-image: url('01_130x66_130x230.png');
+    background-image: resourceUrl('landscape');
     background-repeat: no-repeat;
     background-size: auto;
     width: 130px;
